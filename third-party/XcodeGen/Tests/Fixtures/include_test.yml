@@ -1,0 +1,30 @@
+include:
+    - included.yml
+    - path: included_additional.yml
+      enable: ${INCLUDE_ADDITIONAL_YAML}
+packages:
+  Yams:
+    url: https://github.com/jpsim/Yams
+    majorVersion: 2.0.0
+name: NewName
+settingGroups:
+  test:
+    MY_SETTING1: NEW VALUE
+    MY_SETTING3: VALUE3
+  new:
+    MY_SETTING: VALUE
+  toReplace:REPLACE:
+    MY_SETTING2: VALUE2
+targets:
+  NewTarget:
+    type: application
+    platform: iOS
+    templates: [IncludedTemplate]
+    sources:
+      - target
+  IncludedTarget:
+    name: IncludedTargetNew
+    platform: tvOS
+    sources:REPLACE: NewSource
+    dependencies:
+      - package: Yams

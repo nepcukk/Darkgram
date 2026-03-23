@@ -1,0 +1,36 @@
+name: CI
+on:
+  push: {}
+  pull_request: {}
+jobs:
+  run:
+    runs-on: macos-15
+    name: Xcode ${{ matrix.xcode }}
+    strategy:
+      matrix:
+        xcode: ["16.0", "16.3"]
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@master
+      - name: Resolve
+        run: swift package resolve
+      - name: Build
+        run: swift build
+      - name: Test
+        run: set -o pipefail && swift test 2>&1 | xcpretty
+      - name: Gen fixtures
+        run: scripts/gen-fixtures.sh
+      - name: Check fixtures
+        run: scripts/diff-fixtures.sh
+      - name: Build fixtures
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: scripts/build-fixtures.sh
+  run-linux:
+    runs-on: ubuntu-latest
+    name: Linux
+    steps:
+      - uses: actions/checkout@master
+      - name: Build and run tests
+        run: swift test --enable-test-discovery

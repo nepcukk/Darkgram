@@ -1,0 +1,9 @@
+build --announce_rc
+build --features=swift.use_global_module_cache
+build --verbose_failures
+build --remote_cache_async
+build --define=buildNumber=10000
+build --define=telegramVersion=12.4
+build --//Telegram:disableExtensions
+build --//Telegram:disableStripping
+build --features=-swift.debug_prefix_map

@@ -1,0 +1,34 @@
+configFiles:
+  IncludedConfig: config
+include:
+  - path: legacy_paths_test/recursive_include.yml
+    relativePaths: false
+options:
+  carthageBuildPath: carthage_build
+  carthageExecutablePath: carthage_executable
+targets:
+  IncludedTarget:
+    type: application
+    platform: tvOS
+    configFiles:
+      Config: config
+    dependencies:
+      - framework: Framework
+    info:
+      path: info
+    entitlements:
+      path: entitlements
+    preBuildScripts:
+    - path: preBuildScript
+    postCompileScripts:
+    - path: postCompileScript
+    postBuildScripts:
+    - path: postBuildScript
+aggregateTargets:
+  IncludedAggregateTarget:
+    targets:
+      - IncludedTarget
+    configFiles:
+      Config: config
+    buildScripts:
+    - path: buildScript

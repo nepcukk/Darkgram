@@ -1,0 +1,12 @@
+name: Included_Additional
+settingGroups:
+  test:
+    MY_SETTING5: ADDITIONAL
+packages:
+  SwiftPM:
+    url: https://github.com/apple/swift-package-manager
+    branch: swift-5.0-branch
+targets:
+  IncludedTarget:
+    dependencies:
+      - package: SwiftPM

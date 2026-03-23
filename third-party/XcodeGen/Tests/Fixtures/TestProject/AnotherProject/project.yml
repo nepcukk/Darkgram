@@ -1,0 +1,29 @@
+name: AnotherProject
+include: [../environments.yml]
+options:
+  useBaseInternationalization: false
+configFiles:
+  Test Debug: ../Configs/config.xcconfig
+targets:
+  BundleX:
+    type: bundle
+    platform: iOS
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+  BundleY:
+    type: bundle
+    platform: iOS
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+  ExternalTarget:
+    type: framework
+    platform: iOS
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+  IncludedLegacy:
+    type: ""
+    platform: iOS
+    legacy:
+      toolPath: /usr/bin/true
+      workingDirectory: .
+

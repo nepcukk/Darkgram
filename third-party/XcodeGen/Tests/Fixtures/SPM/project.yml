@@ -1,0 +1,64 @@
+name: SPM
+packages:
+  Codability:
+    url: https://github.com/yonaskolb/Codability
+    majorVersion: 0.2.1
+  SwiftRoaring:
+    url: https://github.com/piotte13/SwiftRoaring
+    majorVersion: 1.0.4
+  Prefire:
+    url: https://github.com/BarredEwe/Prefire
+    majorVersion: 1.4.1
+  XcodeGen:
+    path: ../../.. #XcodeGen itself
+    group: SPM
+  FooFeature:
+    path: FooFeature
+aggregateTargets:
+  AggTarget:
+    buildToolPlugins:
+      - plugin: PrefirePlaybookPlugin
+        package: Prefire
+targets:
+  App:
+    type: application
+    platform: iOS
+    sources: [SPM]
+    scheme:
+      testTargets:
+        - package: XcodeGen/XcodeGenKitTests
+        - Tests
+    buildToolPlugins:
+      - plugin: PrefirePlaybookPlugin
+        package: Prefire
+    dependencies:
+      - package: Codability
+        weak: true
+      - package: SwiftRoaring
+        product: SwiftRoaringDynamic
+        embed: true
+      - target: StaticLibrary
+      - package: XcodeGen
+      - package: FooFeature
+        products:
+          - FooDomain
+          - FooUI
+  Tests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [SPMTests]
+    dependencies:
+      - target: App
+  StaticLibrary:
+    type: library.static
+    platform: iOS
+    sources: StaticLibrary
+    dependencies:
+      - package: Codability
+      - package: SwiftRoaring
+        product: SwiftRoaringDynamic
+      - package: XcodeGen
+      - package: FooFeature
+        products:
+        - FooDomain
+        - FooUI
