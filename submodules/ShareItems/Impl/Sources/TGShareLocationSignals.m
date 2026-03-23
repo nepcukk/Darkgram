@@ -22,7 +22,7 @@ NSString *const TGShareFoursquareLocale = @"en";
 NSString *const TGShareFoursquareProvider = @"foursquare";
 
 NSString *const TGShareGoogleShortenerEndpointUrl = @"https://www.googleapis.com/urlshortener/v1/url";
-NSString *const TGShareGoogleAPIKey = @"AIzaSyBCTH4aAdvi0MgDGlGNmQAaFS8GTNBrfj4";
+NSString *const TGShareGoogleAPIKey = @"";
 NSString *const TGShareGoogleMapsShortHost = @"goo.gl";
 NSString *const TGShareGoogleMapsShortPath = @"/maps";
 NSString *const TGShareGoogleMapsHost = @"google.com";
